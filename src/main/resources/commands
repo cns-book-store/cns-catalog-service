@@ -1,0 +1,16 @@
+$ ./gradlew bootRun
+$ ./gradlew bootBuildImage
+$ docker run --rm --name cns-catalog-service -p 8080:8080 cns-catalog-service:0.0.1-SNAPSHOT
+$ minikube start
+$ minikube image load catalog-service:0.0.1-SNAPSHOT
+$ kubectl create deployment cns-catalog-service --image=cns-catalog-service:0.0.1-SNAPSHOT
+  deployment.apps/cns-catalog-service created
+$ kubectl get deployment
+$ kubectl get pod
+$ kubectl logs deployment/cns-catalog-service
+$ kubectl expose deployment cns-catalog-service --name=cns-catalog-service --port=8080
+$ kubectl get service cns-catalog-service
+$ kubectl port-forward service/cns-catalog-service 8000:8080
+$ kubectl delete service cns-catalog-service
+$ kubectl delete deployment cns-catalog-service
+$ minikube stop
