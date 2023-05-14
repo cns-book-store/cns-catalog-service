@@ -1,0 +1,34 @@
+### GET all books ###
+GET http://localhost:9001/api/v1/books
+
+### GET a book by ISBN ###
+GET http://localhost:9001/api/v1/books/978-1-56619-909-4
+
+### POST a new book ###
+POST http://localhost:9001/api/v1/books
+Content-Type: application/json
+
+{
+  "isbn": "978-1-56619-909-4",
+  "title": "Clean Code",
+  "author": "Robert C. Martin",
+  "publisher": "Prentice Hall",
+  "publicationYear": 2008,
+  "price": 29.99
+}
+
+### DELETE a book by ISBN ###
+DELETE http://localhost:9001/api/v1/books/978-1-56619-909-4
+
+### PUT (update) a book by ISBN ###
+PUT http://localhost:9001/api/v1/books/978-1-56619-909-4
+Content-Type: application/json
+
+{
+  "isbn": "978-1-56619-909-4",
+  "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
+  "author": "Robert C. Martin",
+  "publisher": "Prentice Hall",
+  "publicationYear": 2009,
+  "price": 34.99
+}

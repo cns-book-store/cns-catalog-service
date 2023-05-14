@@ -1,4 +1,5 @@
 $ ./gradlew bootRun
+$ ./gradlew bootJar
 $ ./gradlew bootBuildImage
 $ docker run --rm --name cns-catalog-service -p 8080:8080 cns-catalog-service:0.0.1-SNAPSHOT
 $ minikube start
