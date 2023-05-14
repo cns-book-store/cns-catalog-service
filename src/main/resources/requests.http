@@ -17,6 +17,18 @@ Content-Type: application/json
   "price": 29.99
 }
 
+### POST a new book with no title ###
+POST http://localhost:9001/api/v1/books
+Content-Type: application/json
+
+{
+  "isbn": "978-1-56619-909-4",
+  "author": "Robert C. Martin",
+  "publisher": "Prentice Hall",
+  "publicationYear": 2008,
+  "price": 29.99
+}
+
 ### DELETE a book by ISBN ###
 DELETE http://localhost:9001/api/v1/books/978-1-56619-909-4
 
