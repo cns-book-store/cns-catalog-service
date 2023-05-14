@@ -1,0 +1,36 @@
+name: Commit Stage
+on: push
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3 #check out current git repository
+      - name: Set up JDK
+        uses: actions/setup-java@v3 #install java runtime
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Code vulnerability scanning #scans for vulnerabilites
+        uses: anchore/scan-action@v3
+        id: scan #id for subsequent steps references
+        with:
+          path: "${{ github.workspace }}"
+          fail-build: false #whether to fail or not the build based on security stuff
+          severity-cutoff: high #minimum security cutoff
+          acs-report-enable: true
+      - name: Upload vulnerability report
+        uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
+      - name: Build, unit tests and integration tests #ensures gradle wrapper is executable and runs gradle build task
+        run: |
+          chmod +x gradlew
+          ./gradlew build
