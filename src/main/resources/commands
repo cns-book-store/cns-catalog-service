@@ -14,3 +14,4 @@ $ kubectl port-forward service/cns-catalog-service 8000:8080
 $ kubectl delete service cns-catalog-service
 $ kubectl delete deployment cns-catalog-service
 $ minikube stop
+$ ab -m GET -n 10 -c 5 http://localhost:8080/
