@@ -44,3 +44,9 @@ Content-Type: application/json
   "publicationYear": 2009,
   "price": 34.99
 }
+
+### Home ###
+GET http://localhost:9001/
+
+### Actuator refresh ###
+POST http://localhost:9001/actuator/refresh

@@ -6,3 +6,37 @@ server:
     threads:
       max: 200
       min-spare: 10
+
+spring:
+  application:
+    name: cns-catalog-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      uri: http://localhost:8888
+      request-connect-timeout: 5000
+      request-read-timeout: 5000
+      fail-fast: false #for local development
+      retry:
+        max-attempts: 6
+        initial-interval: 1000
+        max-interval: 2000
+        multiplier: 1.1
+
+cns:
+  greeting: Welcome to the local book catalog!
+
+features:
+  demo-data:
+    enabled: true
+
+logging:
+  level:
+    inc.evil: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
