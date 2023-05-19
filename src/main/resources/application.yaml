@@ -1,7 +1,7 @@
 spring:
-  sql:
-    init:
-      mode: always
+  #  sql:
+  #    init:
+  #      mode: always
   datasource:
     username: postgres
     password: 123456
@@ -24,6 +24,8 @@ spring:
         initial-interval: 1000
         max-interval: 2000
         multiplier: 1.1
+  flyway:
+    baseline-on-migrate: true
 
 server:
   port: 9001

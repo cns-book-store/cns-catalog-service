@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @WebFluxTest(BookController.class)
-class BookControllerMvcTest {
+class BookControllerTest {
     @Autowired
     private WebTestClient webTestClient;
 

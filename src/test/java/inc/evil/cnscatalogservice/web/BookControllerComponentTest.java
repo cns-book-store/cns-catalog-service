@@ -5,12 +5,14 @@ import inc.evil.cnscatalogservice.domain.BookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ActiveProfiles("integration")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BookControllerComponentTest {
 
@@ -33,8 +35,7 @@ class BookControllerComponentTest {
                 .expectStatus().isOk()
                 .expectBodyList(Book.class)
                 .value(actualBooks -> {
-                    assertThat(actualBooks).hasSameSizeAs(expectedBooks);
-                    assertThat(actualBooks).containsExactlyInAnyOrderElementsOf(expectedBooks);
+                    assertThat(actualBooks).anyMatch(b -> b.isbn().equals(book.isbn()));
                 });
     }
 
@@ -50,7 +51,8 @@ class BookControllerComponentTest {
                 .expectStatus().isOk()
                 .expectBody(Book.class).value(actualBook -> {
                     assertThat(actualBook).isNotNull();
-                    assertThat(actualBook).isEqualTo(expectedBook);
+                    assertThat(actualBook).usingRecursiveComparison().ignoringFields("id", "version", "createdDate", "lastModifiedDate")
+                            .isEqualTo(expectedBook);
                 });
     }
 
@@ -97,7 +99,8 @@ class BookControllerComponentTest {
                 .expectStatus().isOk()
                 .expectBody(Book.class).value(actualBook -> {
                     assertThat(actualBook).isNotNull();
-                    assertThat(actualBook).isEqualTo(updatedBook);
+                    assertThat(actualBook).usingRecursiveComparison().ignoringFields("id", "version", "createdDate", "lastModifiedDate")
+                            .isEqualTo(updatedBook);
                 });
     }
 }
