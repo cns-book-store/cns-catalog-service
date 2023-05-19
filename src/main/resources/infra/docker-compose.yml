@@ -1,0 +1,16 @@
+version: '3'
+services:
+  cns-catalog-service-db:
+    image: postgres:13.3
+    container_name: cns-catalog-service-db
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: cns-catalog
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

@@ -11,7 +11,7 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public Iterable<Book> viewBookList(){
+    public Iterable<Book> viewBookList() {
         return bookRepository.findAll();
     }
 
@@ -30,6 +30,7 @@ public class BookService {
     public void removeBookFromCatalog(String isbn) {
         bookRepository.deleteByIsbn(isbn);
     }
+
     public Book editBookDetails(String isbn, Book book) {
         return bookRepository.findByIsbn(isbn)
                 .map(existingBook -> update(book, existingBook))
@@ -38,12 +39,16 @@ public class BookService {
 
     private Book update(Book book, Book existingBook) {
         var bookToUpdate = new Book(
+                existingBook.id(),
                 existingBook.isbn(),
                 book.title(),
                 book.author(),
                 book.publisher(),
                 book.publicationYear(),
-                book.price());
+                book.price(),
+                existingBook.version(),
+                existingBook.createdDate(),
+                existingBook.lastModifiedDate());
         return bookRepository.save(bookToUpdate);
     }
 }

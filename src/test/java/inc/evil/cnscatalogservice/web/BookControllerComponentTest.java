@@ -22,7 +22,7 @@ class BookControllerComponentTest {
 
     @Test
     void get() {
-        Book book = new Book("1231231231", "Title1", "Author1", "Publisher1", 2020, 9.90);
+        Book book = Book.of("1231231231", "Title1", "Author1", "Publisher1", 2020, 9.90);
         var expectedBooks = List.of(book);
         bookService.addBookToCatalog(book);
 
@@ -40,7 +40,7 @@ class BookControllerComponentTest {
 
     @Test
     void getByIsbn() {
-        var expectedBook = new Book("1231231232", "Title1", "Author1", "Publisher1", 2020, 9.90);
+        var expectedBook = Book.of("1231231232", "Title1", "Author1", "Publisher1", 2020, 9.90);
         bookService.addBookToCatalog(expectedBook);
 
         webTestClient
@@ -56,7 +56,7 @@ class BookControllerComponentTest {
 
     @Test
     void post() {
-        var expectedBook = new Book("1231231233", "Title", "Author", "Publisher", 2020, 9.90);
+        var expectedBook = Book.of("1231231233", "Title", "Author", "Publisher", 2020, 9.90);
         webTestClient
                 .post()
                 .uri("/api/v1/books")
@@ -72,7 +72,7 @@ class BookControllerComponentTest {
 
     @Test
     void delete() {
-        var expectedBook = new Book("1231231235", "Title1", "Author1", "Publisher1", 2020, 9.90);
+        var expectedBook = Book.of("1231231235", "Title1", "Author1", "Publisher1", 2020, 9.90);
         bookService.addBookToCatalog(expectedBook);
 
         webTestClient
@@ -84,10 +84,10 @@ class BookControllerComponentTest {
 
     @Test
     void put() {
-        var expectedBook = new Book("1231231234", "Title1", "Author1", "Publisher1", 2020, 9.90);
+        var expectedBook = Book.of("1231231234", "Title1", "Author1", "Publisher1", 2020, 9.90);
         bookService.addBookToCatalog(expectedBook);
 
-        var updatedBook = new Book("1231231234", "NewTitle", "NewAuthor", "NewPublisher", 2022, 29.90);
+        var updatedBook = Book.of("1231231234", "NewTitle", "NewAuthor", "NewPublisher", 2022, 29.90);
 
         webTestClient
                 .put()

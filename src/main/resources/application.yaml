@@ -1,13 +1,14 @@
-server:
-  port: 9001
-  tomcat:
-    connection-timeout: 3s
-    keep-alive-timeout: 15s
-    threads:
-      max: 200
-      min-spare: 10
-
 spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    username: postgres
+    password: 123456
+    url: jdbc:postgresql://localhost:5435/cns-catalog
+    hikari:
+      connection-timeout: 2000
+      maximum-pool-size: 5
   application:
     name: cns-catalog-service
   config:
@@ -24,12 +25,14 @@ spring:
         max-interval: 2000
         multiplier: 1.1
 
-cns:
-  greeting: Welcome to the local book catalog!
-
-features:
-  demo-data:
-    enabled: true
+server:
+  port: 9001
+  tomcat:
+    connection-timeout: 3s
+    keep-alive-timeout: 15s
+    threads:
+      max: 200
+      min-spare: 10
 
 logging:
   level:
@@ -40,3 +43,12 @@ management:
     web:
       exposure:
         include: '*'
+
+cns:
+  greeting: Welcome to the local book catalog!
+
+features:
+  demo-data:
+    enabled: true
+
+
