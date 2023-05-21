@@ -27,6 +27,7 @@ dependencies {
     implementation("org.springframework.retry:spring-retry")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.zalando:logbook-spring-boot-starter:3.0.0")
     implementation("org.flywaydb:flyway-core")
 
 

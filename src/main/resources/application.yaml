@@ -39,6 +39,7 @@ server:
 logging:
   level:
     inc.evil: debug
+    org.zalando.logbook: TRACE
 
 management:
   endpoints:
