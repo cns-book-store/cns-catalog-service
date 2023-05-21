@@ -6,9 +6,13 @@ services:
     image: cns-catalog-service
     container_name: cns-catalog-service
     environment:
+      BPL_JVM_THREAD_COUNT: 50
+      BPL_DEBUG_ENABLED: true
+      BPL_DEBUG_PORT: 8001
       SPRING_DATASOURCE_URL: jdbc:postgresql://cns-catalog-service-db:5432/cns-catalog
     ports:
       - "9001:9001"
+      - "8001:8001"
     networks:
       - catalog-network
   cns-catalog-service-db:
