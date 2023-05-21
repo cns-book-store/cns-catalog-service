@@ -1,5 +1,16 @@
 version: '3'
 services:
+  cns-catalog-service:
+    depends_on:
+      - cns-catalog-service-db
+    image: cns-catalog-service
+    container_name: cns-catalog-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://cns-catalog-service-db:5432/cns-catalog
+    ports:
+      - "9001:9001"
+    networks:
+      - catalog-network
   cns-catalog-service-db:
     image: postgres:13.3
     container_name: cns-catalog-service-db
@@ -14,3 +25,9 @@ services:
       - "5435:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - catalog-network
+
+networks:
+  catalog-network:
+    driver: bridge
