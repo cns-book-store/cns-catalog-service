@@ -39,7 +39,8 @@ server:
 logging:
   level:
     inc.evil: debug
-    org.zalando.logbook: TRACE
+    org.zalando.logbook: trace
+    net.ttddyy.dsproxy.listener: debug
 
 management:
   endpoints:
