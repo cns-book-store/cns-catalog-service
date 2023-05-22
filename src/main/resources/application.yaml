@@ -5,10 +5,12 @@ spring:
   datasource:
     username: postgres
     password: 123456
-    url: jdbc:postgresql://localhost:5435/cns-catalog
+    url: jdbc:postgresql://localhost:5432/cns-catalog
     hikari:
       connection-timeout: 2000
       maximum-pool-size: 5
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
   application:
     name: cns-catalog-service
   config:
@@ -29,6 +31,7 @@ spring:
 
 server:
   port: 9001
+  shutdown: graceful
   tomcat:
     connection-timeout: 3s
     keep-alive-timeout: 15s
